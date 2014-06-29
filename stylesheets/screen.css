@@ -1,0 +1,154 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 17, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 9, ../sass/screen.scss */
+html {
+  height: 100%;
+  background-color: #a90329;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FFA90329', endColorstr='#FF6D0019');
+  background-image: -webkit-gradient(radial, 50%, 0, 50%, 100, color-stop(0%, #a90329), color-stop(44%, #8f0222), color-stop(100%, #6d0019));
+  background-image: -webkit-radial-gradient(center, ellipse cover, #a90329 0%, #8f0222 44%, #6d0019 100%);
+  background-image: -moz-radial-gradient(center, ellipse cover, #a90329 0%, #8f0222 44%, #6d0019 100%);
+  background-image: -o-radial-gradient(center, ellipse cover, #a90329 0%, #8f0222 44%, #6d0019 100%);
+  background-image: radial-gradient(center, ellipse cover, #a90329 0%, #8f0222 44%, #6d0019 100%);
+}
+
+/* line 18, ../sass/screen.scss */
+body {
+  width: 800px;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+}
+/* line 26, ../sass/screen.scss */
+body h1 {
+  font-size: 200%;
+  font-family: sans-serif;
+}
+/* line 31, ../sass/screen.scss */
+body .todo, body .list {
+  padding: 5px;
+  height: 40px;
+  font-size: 110%;
+}
+/* line 36, ../sass/screen.scss */
+body .todo *, body .list * {
+  line-height: 40px;
+}
+/* line 44, ../sass/screen.scss */
+body .todo a,
+body .todo a:link,
+body .todo a:visited,
+body .todo a:hover,
+body .todo a:active, body .list a,
+body .list a:link,
+body .list a:visited,
+body .list a:hover,
+body .list a:active {
+  text-decoration: none;
+  color: black;
+}
+/* line 49, ../sass/screen.scss */
+body .todo a:hover, body .list a:hover {
+  text-decoration: underline;
+}
+/* line 53, ../sass/screen.scss */
+body .todo:hover, body .list:hover {
+  background-color: #ddd;
+}
+/* line 56, ../sass/screen.scss */
+body .todo:hover .remove, body .list:hover .remove {
+  display: inline-block;
+  margin-left: 20px;
+  vertical-align: sub;
+}
+/* line 63, ../sass/screen.scss */
+body .done {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  float: right;
+}
+/* line 70, ../sass/screen.scss */
+body .done.done-true {
+  background-image: url(/check.png);
+}
+/* line 74, ../sass/screen.scss */
+body .done.done-false {
+  background-image: url(/cross.png);
+}
+/* line 78, ../sass/screen.scss */
+body .remove {
+  width: 24px;
+  height: 24px;
+  display: none;
+  background-image: url(/trash.png);
+}

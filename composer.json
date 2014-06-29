@@ -1,0 +1,18 @@
+{
+	"name": "dlaxar/modo",
+	"description": "A MongoDB Todo Application",
+	"minimum-stability": "alpha",
+	"license": "MIT",
+	"private": true,
+	"authors": [
+		{
+			"name": "Daniel Laxar",
+			"email": "i.dlaxar@gmail.com"
+		}
+	],
+	"require": {
+		"slim/slim": "2.4.3",
+		"doctrine/mongodb-odm": "~1.0.0",
+		"doctrine/orm": "2.x"
+	}
+}

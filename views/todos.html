@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		var loc = window.location.href.split('/');
+		var listId = loc[loc.length-1];
+	</script>
+
+	<title></title>
+	<script src="http://resources.d/js/jquery.js"></script>
+	<script src="/js/vendor/underscore.js"></script>
+	<script src="/js/vendor/backbone.js"></script>
+
+	<script src="/js/models.js"></script>
+	<script src="/js/views.js"></script>
+
+	<link href="/stylesheets/screen.css" type="text/css" rel="stylesheet">
+
+
+</head>
+<body>
+<h1 id="listName">
+</h1>
+
+<section id="list"></section>
+
+<form >
+	<label for="name">Name: </label><input type="text" name="name" id="name" />
+	<input id="newTodo" type="submit"/>
+</form>
+
+
+<script>
+
+	$('#newTodo').click(function(e) {
+		var name = $(e.target).siblings('#name').val();
+		if(name.length) {
+			var model = new Todo({name: name});
+			list.add(model);
+			model.save();
+		}
+
+		e.preventDefault();
+		listViewRenderer.render();
+	});
+
+	var currentList = new List({id: listId});
+	currentList.fetch().done(function() {
+		console.log('list fetched');
+		$('#listName').text(currentList.get('name'));
+		document.title = currentList.get('name');
+	});
+
+
+	var TodoCollection = Backbone.Collection.extend({
+		url: '/list/' + listId + '/todos',
+		model: Todo,
+		initialize: function() {
+		}
+	});
+
+	var list = new TodoCollection();
+
+
+	var listViewRenderer = new TodoCollectionView({ model: list, el: $('#list') });
+
+	list.fetch().done(function() {
+		listViewRenderer.render();
+	});
+
+
+</script>
+<script type="text/template" id="task_template">
+	<article class="todo" data-id="<%= id %>">
+		<span><%= name %></span><a href="#" class="remove"></a><span  class="done done-<%= done %>"></span>
+	</article>
+
+</script>
+</body>
+</html>

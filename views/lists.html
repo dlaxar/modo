@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MoDo</title>
+
+	<script src="http://resources.d/js/jquery.js"></script>
+	<script src="/js/vendor/underscore.js"></script>
+	<script src="/js/vendor/backbone.js"></script>
+
+	<script src="/js/models.js"></script>
+	<script src="/js/views.js"></script>
+
+	<link href="/stylesheets/screen.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+
+	<h1>
+		MoDo
+	</h1>
+
+	<section id="list">
+
+	</section>
+
+	<form>
+		<label for="name">Name: </label><input type="text" name="name" id="name" />
+		<input id="newList" type="submit"/>
+	</form>
+
+
+<script type="text/template" id="list_template">
+	<article class="list" data-id="<%= id %>">
+		<span><%= name %></span><a href="#" class="remove"></a>
+	</article>
+</script>
+
+<script>
+
+	$('#newList').click(function(e) {
+		var name = $(e.target).siblings('#name').val();
+		if(name.length) {
+			var model = new List({name: name});
+			collection.add(model);
+			model.save().done(function() {
+				console.log(model);
+				view.render();
+			});
+		}
+
+		e.preventDefault();
+		return false;
+	});
+
+	var collection = new ListCollection();
+
+	var view = new ListView({model: collection, el: $('#list')});
+	view.template = _.template($('#list_template').html());
+
+	collection.fetch().done(function() {
+		view.render();
+	});
+
+</script>
+
+</body>
+</html>
