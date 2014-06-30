@@ -52,7 +52,19 @@ $app->delete('/list/:id', function($id) use($dm) {
 	$dm->remove($list);
 });
 
-$app->get('/list/:id/todos', $noop);
+$app->get('/list/:id/todos', function($id) use($dm) {
+	$list = $dm->find('Models\TodoList', $id);
+
+	$output = array();
+	foreach($list->getTasks()->toArray() as $task) {
+		$output[] = array(
+			'id' => $task->getId(),
+			'name' => $task->getName(),
+			'done' => $task->getDone(),
+		);
+	}
+
+});
 $app->post('/list/:id/todos', $noop);
 $app->put('/list/:id/todos/:todoId', $noop);
 $app->delete('/list/:id/todos/:todoId', $noop);
