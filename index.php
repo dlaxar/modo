@@ -97,7 +97,19 @@ $app->put('/list/:id/todos/:todoId', function($id, $taskId) use ($app, $dm) {
 		->getQuery()->execute();
 
 });
-$app->delete('/list/:id/todos/:todoId', $noop);
+$app->delete('/list/:id/todos/:todoId', function($id, $taskId) use ($dm) {
+	$list = $dm->find('Models\TodoList', $id);
+
+	$tasks = $list->getTasks();
+	$remove = null;
+	foreach($tasks as $key=>$task) {
+		if($task->getId() == $taskId) {
+			$remove = $key;
+		}
+	}
+
+	$tasks->remove($remove);
+});
 
 $app->get('/', function() use ($app) {
 	$app->render('lists.html');
