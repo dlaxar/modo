@@ -85,7 +85,18 @@ $app->post('/list/:id/todos', function($id) use($app, $dm) {
 	));
 
 });
-$app->put('/list/:id/todos/:todoId', $noop);
+$app->put('/list/:id/todos/:todoId', function($id, $taskId) use ($app, $dm) {
+	$data = json_decode($app->request->getBody());
+
+
+	$dm->createQueryBuilder('Models\ToDoList')
+		->update()
+		->field('_id')->equals($id)
+		->field('tasks._id')->equals(new MongoId($taskId))
+		->field('tasks.$.done')->set($data->done)
+		->getQuery()->execute();
+
+});
 $app->delete('/list/:id/todos/:todoId', $noop);
 
 $app->get('/', function() use ($app) {
