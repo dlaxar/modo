@@ -39,7 +39,14 @@ $app->post('/list', function() use ($app, $dm) {
 		'name' => $list->getName(),
 	));
 });
-$app->get('/list/:id', $noop);
+$app->get('/list/:id', function($id) use($dm) {
+	$list = $dm->find('Models\TodoList', $id);
+
+	echo json_encode(array(
+		'id' => $list->getId(),
+		'name' => $list->getName(),
+	));
+});
 $app->delete('/list/:id', function($id) use($dm) {
 	$list = $dm->getReference('Models\TodoList', $id);
 	$dm->remove($list);
