@@ -40,7 +40,10 @@ $app->post('/list', function() use ($app, $dm) {
 	));
 });
 $app->get('/list/:id', $noop);
-$app->delete('/list/:id', $noop);
+$app->delete('/list/:id', function($id) use($dm) {
+	$list = $dm->getReference('Models\TodoList', $id);
+	$dm->remove($list);
+});
 
 $app->get('/list/:id/todos', $noop);
 $app->post('/list/:id/todos', $noop);
@@ -56,3 +59,4 @@ $app->get('/l/:id', function() use ($app) {
 });
 
 $app->run();
+$dm->flush();
