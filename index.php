@@ -64,8 +64,27 @@ $app->get('/list/:id/todos', function($id) use($dm) {
 		);
 	}
 
+	echo json_encode($output);
+
 });
-$app->post('/list/:id/todos', $noop);
+$app->post('/list/:id/todos', function($id) use($app, $dm) {
+	$list = $dm->find('Models\TodoList', $id);
+	$data = json_decode($app->request->getBody());
+
+	$task = new \Models\ToDo();
+	$task->setName($data->name);
+	$task->setDone($data->done);
+	$list->addTask($task);
+
+	$dm->flush();
+
+	echo json_encode(array(
+		'id' => $task->getId(),
+		'name' => $task->getName(),
+		'done' => $task->getDone()
+	));
+
+});
 $app->put('/list/:id/todos/:todoId', $noop);
 $app->delete('/list/:id/todos/:todoId', $noop);
 
