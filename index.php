@@ -9,8 +9,36 @@ $app = new \Slim\Slim(array(
 
 $noop = function () {};
 
-$app->get('/list', $noop);
-$app->post('/list', $noop);
+$app->get('/list', function() use ($dm) {
+
+	$lists = $dm->getRepository('Models\TodoList')->findAll();
+
+	$output = array();
+
+	foreach($lists as $list) {
+		$output[] = array(
+			'id' => $list->getId(),
+			'name' => $list->getName(),
+		);
+	}
+
+	echo json_encode($output);
+
+});
+$app->post('/list', function() use ($app, $dm) {
+
+	$data = json_decode($app->request->getBody());
+
+	$list = new \Models\TodoList();
+	$list->setName($data->name);
+	$dm->persist($list);
+	$dm->flush();
+
+	echo json_encode(array(
+		'id' => $list->getId(),
+		'name' => $list->getName(),
+	));
+});
 $app->get('/list/:id', $noop);
 $app->delete('/list/:id', $noop);
 
