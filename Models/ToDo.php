@@ -7,15 +7,30 @@
  */
 
 namespace Models;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
 
+/**
+ * Class ToDo
+ * @package Models
+ * @ODM\EmbeddedDocument
+ */
 class ToDo {
 
+	/**
+	 * @ODM\Id
+	 */
 	protected $id;
 
+	/**
+	 * @ODM\String
+	 */
 	protected $name;
 
-	protected $done;
+	/**
+	 * @ODM\Boolean
+	 */
+	protected $done = false;
 
 	/**
 	 * @param mixed $done

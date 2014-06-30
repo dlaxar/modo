@@ -10,13 +10,32 @@ namespace Models;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as ODM;
 
+/**
+ * Class TodoList
+ * @package Models
+ *
+ * @ODM\Document
+ */
 class TodoList  {
 
+	/**
+	 * @var
+	 * @ODM\Id(strategy="INCREMENT")
+	 */
 	protected $id;
 
+	/**
+	 * @var
+	 * @ODM\String
+	 */
 	protected $name;
 
+	/**
+	 * @var \Doctrine\Common\Collections\ArrayCollection
+	 * @ODM\EmbedMany(targetDocument="ToDo")
+	 */
 	protected $tasks;
 
 	function __construct() {
