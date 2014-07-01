@@ -13,18 +13,10 @@ $app->get('/list', function() use ($dm) {
 
 	$lists = $dm->getRepository('Models\TodoList')->findAll();
 
-	$output = array();
-
-	foreach($lists as $list) {
-		$output[] = array(
-			'id' => $list->getId(),
-			'name' => $list->getName(),
-		);
-	}
-
-	echo json_encode($output);
+	echo json_encode($lists);
 
 });
+
 $app->post('/list', function() use ($app, $dm) {
 
 	$data = json_decode($app->request->getBody());
@@ -34,18 +26,12 @@ $app->post('/list', function() use ($app, $dm) {
 	$dm->persist($list);
 	$dm->flush();
 
-	echo json_encode(array(
-		'id' => $list->getId(),
-		'name' => $list->getName(),
-	));
+	echo json_encode($list);
 });
 $app->get('/list/:id', function($id) use($dm) {
 	$list = $dm->find('Models\TodoList', $id);
 
-	echo json_encode(array(
-		'id' => $list->getId(),
-		'name' => $list->getName(),
-	));
+	echo json_encode($list);
 });
 $app->delete('/list/:id', function($id) use($dm) {
 	$list = $dm->getReference('Models\TodoList', $id);
@@ -55,17 +41,7 @@ $app->delete('/list/:id', function($id) use($dm) {
 $app->get('/list/:id/todos', function($id) use($dm) {
 	$list = $dm->find('Models\TodoList', $id);
 
-	$output = array();
-	foreach($list->getTasks()->toArray() as $task) {
-		$output[] = array(
-			'id' => $task->getId(),
-			'name' => $task->getName(),
-			'done' => $task->getDone(),
-		);
-	}
-
-	echo json_encode($output);
-
+	echo json_encode($list->getTasks()->toArray());
 });
 $app->post('/list/:id/todos', function($id) use($app, $dm) {
 	$list = $dm->find('Models\TodoList', $id);
@@ -78,12 +54,7 @@ $app->post('/list/:id/todos', function($id) use($app, $dm) {
 
 	$dm->flush();
 
-	echo json_encode(array(
-		'id' => $task->getId(),
-		'name' => $task->getName(),
-		'done' => $task->getDone()
-	));
-
+	echo json_encode($task);
 });
 $app->put('/list/:id/todos/:todoId', function($id, $taskId) use ($app, $dm) {
 	$data = json_decode($app->request->getBody());
